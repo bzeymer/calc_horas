@@ -1,0 +1,17 @@
+$black: #000000;
+$white: #ffffff;
+
+$light1-grey: lighten($black, 95%);
+$light2-grey: lighten($black, 90%);
+$light3-grey: lighten($black, 85%);
+$light4-grey: lighten($black, 80%);
+$medium-light-grey: lighten($black, 60%);
+$medium-grey: lighten($black, 50%);
+$medium-dark-grey: lighten($black, 40%);
+$dark-grey: lighten($black, 20%);
+
+$light-black-transparency: fade-out($black, 0.8);
+$medium-light-black-transparency: fade-out($black, 0.6);
+$medium-black-transparency: fade-out($black, 0.5);
+$medium-dark-black-transparency: fade-out($black, 0.4);
+$dark-black-transparency: fade-out($black, 0.2);
