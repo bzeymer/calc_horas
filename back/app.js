@@ -1,4 +1,7 @@
 import express from 'express';
+
+import rotaBatidas from './routes/batidas';
+
 let app = express();
 
 app.use((req, res, next) => {
@@ -7,9 +10,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.get('/', (req, res) => {
-    res.send('home');
-})
+rotaBatidas(app);
 
 app.listen(3000, () => {
     console.log('Express running');

@@ -1,11 +1,10 @@
-<div class="overlay" [ngClass]="{'open': open, 'closed': !open}" (click)="toggleDrawer()">
-  <div class="drawer" [ngClass]="{'open': open, 'closed': !open}" (click)="drawerClick($event)">
-    <i class="material-icons back" (click)="toggleDrawer()">arrow_back</i>
-    <ul class="items">
-      <li class="item active">Home</li>
-      <li class="item">Browse</li>
-      <li class="item">Create</li>
-      <li class="item">Test</li>
-    </ul>
-  </div>
+<app-overlay [show]="open" (clicked)="toggleDrawer()"></app-overlay>
+<div class="drawer" [ngClass]="{'open': open, 'closed': !open}" (click)="drawerClick($event)">
+  <i class="material-icons back" (click)="toggleDrawer()">arrow_back</i>
+  <ul class="items">
+    <li class="item active">Home</li>
+    <li class="item">Browse</li>
+    <li class="item">Create</li>
+    <li class="item">Test</li>
+  </ul>
 </div>

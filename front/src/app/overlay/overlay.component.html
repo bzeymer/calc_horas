@@ -1,0 +1,8 @@
+<div
+  class="overlay"
+  [ngClass]="{
+    'show': _show && !_lastShow,
+    'hide': !_show && _lastShow
+  }"
+  (click)="callback()">
+</div>
