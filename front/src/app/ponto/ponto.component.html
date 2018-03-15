@@ -1,0 +1,16 @@
+<div class="ponto">
+  <table class="batidas">
+    <tr>
+      <th>Tipo</th>
+      <th>Hora</th>
+    </tr>
+    <tr class="batida" *ngFor="let batida of batidas">
+      <td class="tipo">
+          {{batida.tipo}}
+      </td>
+      <td class="hora">
+        {{batida.hora}}
+      </td>
+    </tr>
+  </table>
+</div>

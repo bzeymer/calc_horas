@@ -10,6 +10,7 @@ import { ErrorPageComponent } from './error-page/error-page.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { OverlayComponent } from './overlay/overlay.component';
+import { PontoComponent } from './ponto/ponto.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { OverlayComponent } from './overlay/overlay.component';
     HeaderComponent,
     ErrorPageComponent,
     HomeComponent,
-    OverlayComponent
+    OverlayComponent,
+    PontoComponent
   ],
   imports: [
     BrowserModule,
