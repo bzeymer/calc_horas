@@ -9,7 +9,7 @@ export default (app) => {
                 if (!error) {
                     res.send(result);
                 } else {
-                    res.send(error);
+                    console.log(error);
                 }    
             }
         );

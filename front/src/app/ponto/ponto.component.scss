@@ -1,3 +1,51 @@
+@import '../../shared/colors.scss';
+
 .ponto {
-    margin: auto;
+    padding-top: 40px; 
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    
+    mat-table {
+        width: 90%;
+        border-spacing: 0;
+        border: 1px solid $light1-grey;
+    }
 }
+        /*
+        .checkbox {
+
+        }
+
+        tr {
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid $light1-grey;
+
+            th, td {
+                text-align: left;
+                flex: 1;
+            }
+        }
+
+        tr:last-of-type {
+            border: none;
+        }
+
+
+        .header {
+            height: 56px;
+            font-size: 12px;
+            color: $medium-light-grey;
+            font-weight: 500;
+        }
+
+        .batida {
+            height: 48px;            
+            font-size: 13px;
+            color: $dark3-grey;
+            font-weight: 400;
+        }
+    }
+} */

@@ -1,16 +1,19 @@
 <div class="ponto">
-  <table class="batidas">
-    <tr>
-      <th>Tipo</th>
-      <th>Hora</th>
-    </tr>
-    <tr class="batida" *ngFor="let batida of batidas">
-      <td class="tipo">
-          {{batida.tipo}}
-      </td>
-      <td class="hora">
-        {{batida.hora}}
-      </td>
-    </tr>
-  </table>
+
+  <mat-table #table [dataSource]="batidas">
+    
+    <ng-container matColumnDef="tipo">
+      <mat-header-cell *matHeaderCellDef> Tipo </mat-header-cell>
+      <mat-cell *matCellDef="let batida"> {{batida.tipo}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="hora">
+      <mat-header-cell *matHeaderCellDef> Hora </mat-header-cell>
+      <mat-cell *matCellDef="let batida"> {{batida.hora}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
 </div>

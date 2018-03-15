@@ -8,7 +8,10 @@ $light4-grey: lighten($black, 80%);
 $medium-light-grey: lighten($black, 60%);
 $medium-grey: lighten($black, 50%);
 $medium-dark-grey: lighten($black, 40%);
-$dark-grey: lighten($black, 20%);
+$dark4-grey: lighten($black, 20%);
+$dark3-grey: lighten($black, 15%);
+$dark2-grey: lighten($black, 10%);
+$dark1-grey: lighten($black, 5%);
 
 $light-black-transparency: fade-out($black, 0.8);
 $medium-light-black-transparency: fade-out($black, 0.6);

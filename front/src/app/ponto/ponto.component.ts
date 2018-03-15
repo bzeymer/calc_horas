@@ -8,15 +8,18 @@ import http from '../services/requests.service';
   styleUrls: ['./ponto.component.scss']
 })
 export class PontoComponent implements OnInit {
+  displayedColumns = ['tipo', 'hora'];
   batidas = [];
 
   constructor() { }
 
   ngOnInit() {
     http.get('batidas').then((response) => {
+      console.log(response);
       this.batidas = response.data;
     }).catch((error) => {
       // TODO Treat error!
+      this.batidas = [];
       console.log(error);
     });
   }
