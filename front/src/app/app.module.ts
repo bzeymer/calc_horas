@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatCheckboxModule, MatTableModule } from '@angular/material';
+import { MatCheckboxModule, MatTableModule, MatToolbarModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { DrawerComponent } from './drawer/drawer.component';
@@ -12,7 +12,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { OverlayComponent } from './overlay/overlay.component';
 import { PontoComponent } from './ponto/ponto.component';
-
+import { RequestService } from './services/request.service';
+import { PontoService } from './services/ponto.service';
 
 @NgModule({
   declarations: [
@@ -29,9 +30,14 @@ import { PontoComponent } from './ponto/ponto.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     MatCheckboxModule,
-    MatTableModule
+    MatTableModule,
+    MatToolbarModule
   ],
-  providers: [DrawerService],
+  providers: [
+    DrawerService,
+    RequestService,
+    PontoService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
