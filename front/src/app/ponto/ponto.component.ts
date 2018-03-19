@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import * as moment from 'moment';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { RequestService } from '../services/request.service';
+import { Batida } from './models/batida';
 import { Dia } from './models/dia';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-ponto',
@@ -10,24 +13,25 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./ponto.component.scss']
 })
 export class PontoComponent {
-  displayedColumns = ['tipo', 'hora'];
+  displayedColumns = ['dia', 'entrada1', 'saida1', 'entrada2', 'saida2'];
   dias: Dia[] = [];
-  startDate: Date;
-  endDate: Date;
+  diasStream = new BehaviorSubject<any[]>([]);
+  startDate;
+  endDate;
 
   constructor(
     private requestService: RequestService,
     private activatedRoute: ActivatedRoute
   ) {
+    moment.locale(window.navigator.language);
     this.activatedRoute.queryParams.subscribe(params => {
-      this.startDate = params['startDate'] ? new Date(params['startDate']) : undefined;
-      this.endDate = params['endDate'] ? new Date(params['endDate']) : undefined;
+      this.getParamsDate(params);
       this.fillDias();
       this.requestService.req('get', 'batidas', {startDate: this.startDate, endDate: this.endDate});
     });
 
     this.requestService.getResponse().subscribe((state) => {
-      this.dias = this.arrangeByDays(state.batidas.response.data);
+      this.arrangeByDays(state.batidas.response.data);
     });
   }
 
@@ -36,28 +40,68 @@ export class PontoComponent {
       return;
     }
 
-    const auxDate: Date = new Date(this.startDate.getTime());
+    let auxDate = this.startDate;
 
     if (this.endDate) {
       let index = 0;
-      while (auxDate.getTime() !== this.endDate.getTime()) {
-        this.dias.push(new Dia(auxDate.getTime()));
-        auxDate.setDate(auxDate.getDate() + 1);
+      while (auxDate < this.endDate) {
+        this.dias.push(new Dia(moment(auxDate)));
+        auxDate = moment(auxDate).add(1, 'd').valueOf();
         index++;
-      }
-    } else {
-      for (let index = 0; index <= 30; index++) {
-        this.dias.push(new Dia(auxDate.getTime()));
-        auxDate.setDate(auxDate.getDate() + 1);
       }
     }
   }
 
-  arrangeByDays(batidas): any[] {
-    //this.dias.forEach
+  arrangeByDays(batidas) {
+    this.dias.forEach(dia => {
+      batidas.forEach(batida => {
+        if (this.belongsTo(batida.hora, dia.dia)) {
+          this.addToDay(batida, dia);
+        }
+      });
+    });
+    this.diasStream.next(this.dias);
+  }
 
+  addToDay(batida, dia) {
+    if (batida.tipo === 'Entrada') {
+      if (!dia.entrada1.id) {
+        dia.entrada1 = new Batida(batida);
+      } else {
+        dia.entrada2 = new Batida(batida);
+      }
+    } else if (batida.tipo === 'Saída') {
+      if (!dia.saida1.id) {
+        dia.saida1 = new Batida(batida);
+      } else {
+        dia.saida2 = new Batida(batida);
+      }
+    }
+  }
 
+  belongsTo(batida, dia) {
+    return (moment(batida).startOf('day').valueOf() === dia.startOf('day').valueOf());
+  }
 
-    return [];
+  getParamsDate(params) {
+    if (params['startDate'] && params['endDate']) {
+      this.startDate = moment(params['startDate']).startOf('day').valueOf();
+      this.endDate = moment(params['endDate']).startOf('day').valueOf();
+
+    } else if (params['startDate']) {
+      const paramDate = moment(params['startDate']);
+      this.startDate = paramDate.startOf('day').valueOf();
+      this.endDate = paramDate.add(1, 'M').startOf('day').valueOf();
+
+    } else if (params['endDate']) {
+      const paramDate = moment(params['endDate']);
+      this.endDate = paramDate.startOf('day').valueOf();
+      this.startDate = paramDate.subtract(1, 'M').startOf('day').valueOf();
+
+    } else {
+      const today = moment();
+      this.endDate = today.startOf('day').valueOf();
+      this.startDate = today.subtract(1, 'M').startOf('day').valueOf();
+    }
   }
 }

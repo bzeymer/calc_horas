@@ -1,15 +1,33 @@
 <div class="ponto">
 
-  <mat-table #table [dataSource]="dias">
+  <mat-table #table [dataSource]="diasStream">
     
-    <ng-container matColumnDef="tipo">
-      <mat-header-cell *matHeaderCellDef> Tipo </mat-header-cell>
-      <mat-cell *matCellDef="let batida"> {{batida.tipo}} </mat-cell>
+    <ng-container matColumnDef="dia">
+      <mat-header-cell *matHeaderCellDef> Dia </mat-header-cell>
+      <mat-cell *matCellDef="let dia"> {{dia.dia.format('L')}} </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="hora">
-      <mat-header-cell *matHeaderCellDef> Hora </mat-header-cell>
-      <mat-cell *matCellDef="let batida"> {{batida.hora}} </mat-cell>
+    <ng-container matColumnDef="entrada1">
+      <mat-header-cell *matHeaderCellDef> Entrada </mat-header-cell>
+      <mat-cell *matCellDef="let dia"> {{dia.entrada1.hora ? dia.entrada1.hora.format('LTS') : '-'}} </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="saida1">
+      <mat-header-cell *matHeaderCellDef> Saída </mat-header-cell>
+      <mat-cell *matCellDef="let dia"> {{dia.saida1.hora ? dia.saida1.hora.format('LTS') : '-'}} </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="entrada2">
+      <mat-header-cell *matHeaderCellDef> Entrada </mat-header-cell>
+      <mat-cell *matCellDef="let dia"> {{dia.entrada2.hora ? dia.entrada2.hora.format('LTS') : '-'}} </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="saida2">
+      <mat-header-cell *matHeaderCellDef> Saída </mat-header-cell>
+      <mat-cell *matCellDef="let dia"> {{dia.saida2.hora ? dia.saida2.hora.format('LTS') : '-'}} </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
