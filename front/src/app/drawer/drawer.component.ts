@@ -9,6 +9,17 @@ import { DrawerService } from './drawer.service';
 export class DrawerComponent implements OnInit {
   open = false;
 
+  menuItems = [
+    {
+      name: 'Home',
+      path: 'home'
+    },
+    {
+      name: 'Ponto',
+      path: 'ponto'
+    }
+  ];
+
   constructor(
     private drawerService: DrawerService
   ) {

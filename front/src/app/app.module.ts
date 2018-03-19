@@ -14,6 +14,7 @@ import { OverlayComponent } from './overlay/overlay.component';
 import { PontoComponent } from './ponto/ponto.component';
 import { RequestService } from './services/request.service';
 import { PontoService } from './services/ponto.service';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { PontoService } from './services/ponto.service';
     BrowserAnimationsModule,
     MatCheckboxModule,
     MatTableModule,
-    MatToolbarModule
+    MatToolbarModule,
+    RouterModule
   ],
   providers: [
     DrawerService,

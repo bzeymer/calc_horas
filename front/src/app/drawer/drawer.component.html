@@ -2,9 +2,14 @@
 <div class="drawer" [ngClass]="{'open': open, 'closed': !open}" (click)="drawerClick($event)">
   <i class="material-icons back" (click)="toggleDrawer()">arrow_back</i>
   <ul class="items">
-    <li class="item active">Home</li>
-    <li class="item">Browse</li>
-    <li class="item">Create</li>
-    <li class="item">Test</li>
+    <li
+      class="item"
+      *ngFor="let item of menuItems"
+      [routerLink]="[item.path]"
+      routerLinkActive="active"
+      (click)="toggleDrawer()"
+    >
+      {{item.name}}
+    </li>
   </ul>
 </div>
