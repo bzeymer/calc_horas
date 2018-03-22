@@ -7,7 +7,7 @@ export class Dia {
     saida1: Batida;
     entrada2: Batida;
     saida2: Batida;
-    total: number;
+    total: moment.Moment;
     especial: string;
 
     constructor(time: moment.Moment) {
@@ -16,7 +16,7 @@ export class Dia {
         this.saida1 = new Batida();
         this.entrada2 = new Batida();
         this.saida2 = new Batida();
-        this.total = 0;
+        this.total = moment(0);
         this.especial = '';
     }
 }

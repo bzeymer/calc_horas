@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import * as moment from 'moment';
+import momentDurationFormatSetup from 'moment-duration-format';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { RequestService } from '../services/request.service';
@@ -13,7 +14,7 @@ import { Dia } from './models/dia';
   styleUrls: ['./ponto.component.scss']
 })
 export class PontoComponent {
-  displayedColumns = ['dia', 'entrada1', 'saida1', 'entrada2', 'saida2'];
+  displayedColumns = ['dia', 'diaSemana', 'entrada1', 'saida1', 'entrada2', 'saida2', 'total'];
   dias: Dia[] = [];
   diasStream = new BehaviorSubject<any[]>([]);
   startDate;
@@ -59,8 +60,13 @@ export class PontoComponent {
           this.addToDay(batida, dia);
         }
       });
+      this.calculateTotal(dia);
     });
     this.diasStream.next(this.dias);
+  }
+
+  belongsTo(batida, dia) {
+    return (moment(batida).startOf('day').valueOf() === dia.startOf('day').valueOf());
   }
 
   addToDay(batida, dia) {
@@ -79,8 +85,21 @@ export class PontoComponent {
     }
   }
 
-  belongsTo(batida, dia) {
-    return (moment(batida).startOf('day').valueOf() === dia.startOf('day').valueOf());
+  calculateTotal(dia) {
+    let total = 0;
+    if (dia.entrada1.hora && dia.saida1.hora) {
+      total = dia.saida1.hora.diff(dia.entrada1.hora);
+    }
+
+    if (dia.entrada2.hora && dia.saida2.hora) {
+      total += dia.saida2.hora.diff(dia.entrada2.hora);
+    }
+
+    if (total > 0 ) {
+      dia.total = moment.duration(total);
+    } else {
+      dia.total = undefined;
+    }
   }
 
   getParamsDate(params) {

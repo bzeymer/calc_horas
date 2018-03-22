@@ -7,27 +7,34 @@
       <mat-cell *matCellDef="let dia"> {{dia.dia.format('L')}} </mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="diaSemana">
+      <mat-header-cell *matHeaderCellDef> Dia da Semana </mat-header-cell>
+      <mat-cell *matCellDef="let dia"> {{dia.dia.format('dddd')}} </mat-cell>
+    </ng-container>
+
     <ng-container matColumnDef="entrada1">
       <mat-header-cell *matHeaderCellDef> Entrada </mat-header-cell>
       <mat-cell *matCellDef="let dia"> {{dia.entrada1.hora ? dia.entrada1.hora.format('LTS') : '-'}} </mat-cell>
     </ng-container>
-
 
     <ng-container matColumnDef="saida1">
       <mat-header-cell *matHeaderCellDef> Saída </mat-header-cell>
       <mat-cell *matCellDef="let dia"> {{dia.saida1.hora ? dia.saida1.hora.format('LTS') : '-'}} </mat-cell>
     </ng-container>
 
-
     <ng-container matColumnDef="entrada2">
       <mat-header-cell *matHeaderCellDef> Entrada </mat-header-cell>
       <mat-cell *matCellDef="let dia"> {{dia.entrada2.hora ? dia.entrada2.hora.format('LTS') : '-'}} </mat-cell>
     </ng-container>
 
-
     <ng-container matColumnDef="saida2">
       <mat-header-cell *matHeaderCellDef> Saída </mat-header-cell>
       <mat-cell *matCellDef="let dia"> {{dia.saida2.hora ? dia.saida2.hora.format('LTS') : '-'}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="total">
+      <mat-header-cell *matHeaderCellDef> Contabilizadas </mat-header-cell>
+      <mat-cell *matCellDef="let dia"> {{dia.total ? dia.total.format('hh:mm') : '-'}} </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
